@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Checkin Estágio</string>
+    <string name="btn_entrar">Entrar</string>
+    <string name="btn_checkin">Registrar Check-in</string>
+    <string name="btn_checkout">Registrar Check-out</string>
+    <string name="hint_matricula">Matrícula</string>
+    <string name="hint_senha">Senha</string>
+    <string name="label_empresa">Empresa</string>
+    <string name="label_localizacao">Sua Localização</string>
+    <string name="obtendo_localizacao">Obtendo localização via GPS…</string>
+    <string name="permissao_negada">Permissão de localização negada.</string>
+    <string name="checkin_confirmado">Check-in registrado com sucesso!</string>
+    <string name="checkout_confirmado">Check-out registrado. Até amanhã!</string>
+</resources>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="Theme.CheckinEstagio" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="colorPrimary">@color/azul_primario</item>
+        <item name="colorPrimaryVariant">@color/azul_secundario</item>
+        <item name="colorOnPrimary">@color/branco</item>
+        <item name="colorSecondary">@color/verde_confirmacao</item>
+        <item name="colorOnSecondary">@color/branco</item>
+        <item name="android:statusBarColor">@color/azul_primario</item>
+    </style>
+
+    <style name="Theme.CheckinEstagio.Splash" parent="Theme.CheckinEstagio">
+        <item name="android:windowBackground">@color/azul_primario</item>
+    </style>
+</resources>
