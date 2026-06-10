@@ -1,14 +1,14 @@
 package com.example.mylocation.utils;
 
 import com.example.mylocation.models.RegistroCheckin;
+
 import java.util.ArrayList;
 import java.util.List;
-
 
 public class CheckinManager {
 
     private static CheckinManager instance;
-    private List<RegistroCheckin> registros = new ArrayList<>();
+    private final List<RegistroCheckin> registros = new ArrayList<>();
     private boolean emEstagio = false;
 
     private CheckinManager() {}

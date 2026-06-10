@@ -12,4 +12,5 @@
     <string name="permissao_negada">Permissão de localização negada.</string>
     <string name="checkin_confirmado">Check-in registrado com sucesso!</string>
     <string name="checkout_confirmado">Check-out registrado. Até amanhã!</string>
+    <string name="default_web_client_id">909059573960-83nqvju5082gbbc0p6ilfvm2o40le3vk.apps.googleusercontent.com</string>
 </resources>

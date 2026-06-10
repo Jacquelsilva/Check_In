@@ -8,7 +8,10 @@
         <item name="colorOnSecondary">@color/branco</item>
         <item name="android:statusBarColor">@color/azul_primario</item>
     </style>
-
+    <style name="Theme.CheckinEstagio.NoActionBar" parent="Theme.CheckinEstagio">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
     <style name="Theme.CheckinEstagio.Splash" parent="Theme.CheckinEstagio">
         <item name="android:windowBackground">@color/azul_primario</item>
     </style>

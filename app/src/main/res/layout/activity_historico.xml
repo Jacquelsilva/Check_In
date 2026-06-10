@@ -1,38 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@color/fundo_pagina">
+    android:background="#F5F5F5">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar_historico"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:background="@color/azul_primario"
-        app:titleTextColor="@color/branco"
-        app:navigationIconTint="@color/branco" />
-
-    <TextView
-        android:id="@+id/tv_vazio"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginTop="80dp"
-        android:text="Nenhum registro encontrado para hoje."
-        android:textColor="@color/cinza_texto"
-        android:textSize="14sp"
-        android:visibility="gone"
-        android:layout_marginStart="32dp"
-        android:layout_marginEnd="32dp"
-        android:textAlignment="center" />
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_historico"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:padding="16dp"
+        android:paddingVertical="8dp"
         android:clipToPadding="false" />
+
+    <TextView
+        android:id="@+id/tv_vazio"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:text="Nenhum registro hoje"
+        android:textSize="16sp"
+        android:textColor="@color/cinza_texto"
+        android:visibility="gone" />
 
 </LinearLayout>

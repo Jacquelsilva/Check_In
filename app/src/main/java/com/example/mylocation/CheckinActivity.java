@@ -29,6 +29,12 @@ import com.example.mylocation.utils.SessionManager;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.location.Priority;
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.material.card.MaterialCardView;
 
 import java.io.IOException;
@@ -37,7 +43,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
-public class CheckinActivity extends AppCompatActivity {
+public class CheckinActivity extends AppCompatActivity implements OnMapReadyCallback {
 
     private static final int REQUEST_LOCATION_PERMISSION = 100;
 
@@ -47,6 +53,7 @@ public class CheckinActivity extends AppCompatActivity {
     private Button btnCheckin, btnCheckout;
     private MaterialCardView cardLocalizacao;
     private ImageView ivStatusLoc;
+    private GoogleMap mMap;
 
     private FusedLocationProviderClient fusedLocationClient;
     private SessionManager sessionManager;
@@ -71,18 +78,36 @@ public class CheckinActivity extends AppCompatActivity {
 
         AlunoDatabase.buscarPorMatricula(this, matricula, aluno -> {
             if (aluno == null) {
-                sessionManager.encerrarSessao();
-                startActivity(new Intent(this, LoginActivity.class));
-                finish();
+                if (matricula != null && matricula.contains("@")) {
+                    String nome = matricula.substring(0, matricula.indexOf("@"));
+                    AlunoDatabase.salvarAluno(this, matricula, nome, matricula, alunoNovo -> {
+                        if (alunoNovo == null) {
+                            sessionManager.encerrarSessao();
+                            startActivity(new Intent(this, LoginActivity.class));
+                            finish();
+                            return;
+                        }
+                        alunoLogado = alunoNovo;
+                        inicializar();
+                    });
+                } else {
+                    sessionManager.encerrarSessao();
+                    startActivity(new Intent(this, LoginActivity.class));
+                    finish();
+                }
                 return;
             }
             alunoLogado = aluno;
-            inicializarViews();
-            configurarToolbar();
-            preencherDadosAluno();
-            atualizarEstadoBotoes();
-            solicitarLocalizacao();
+            inicializar();
         });
+    }
+
+    private void inicializar() {
+        inicializarViews();
+        configurarToolbar();
+        preencherDadosAluno();
+        atualizarEstadoBotoes();
+        solicitarLocalizacao();
     }
 
     private void inicializarViews() {
@@ -103,6 +128,33 @@ public class CheckinActivity extends AppCompatActivity {
 
         btnCheckin.setOnClickListener(v -> confirmarCheckin());
         btnCheckout.setOnClickListener(v -> confirmarCheckout());
+
+        SupportMapFragment mapFragment = (SupportMapFragment)
+                getSupportFragmentManager().findFragmentById(R.id.map);
+        if (mapFragment != null) {
+            mapFragment.getMapAsync(this);
+        }
+    }
+
+    @Override
+    public void onMapReady(GoogleMap googleMap) {
+        mMap = googleMap;
+        mMap.getUiSettings().setZoomControlsEnabled(true);
+        mMap.getUiSettings().setMyLocationButtonEnabled(false);
+
+        if (localizacaoObtida) {
+            atualizarMapa();
+        }
+    }
+
+    private void atualizarMapa() {
+        if (mMap == null) return;
+        LatLng posicao = new LatLng(latitudeAtual, longitudeAtual);
+        mMap.clear();
+        mMap.addMarker(new MarkerOptions()
+                .position(posicao)
+                .title("Você está aqui"));
+        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(posicao, 16));
     }
 
     private void configurarToolbar() {
@@ -159,6 +211,7 @@ public class CheckinActivity extends AppCompatActivity {
                         ivStatusLoc.setImageResource(R.drawable.ic_status_verde);
 
                         atualizarEstadoBotoes();
+                        atualizarMapa();
                     } else {
                         tvLocalizacao.setText("Não foi possível obter a localização. Tente novamente.");
                         ivStatusLoc.setImageResource(R.drawable.ic_status_vermelho);

@@ -14,6 +14,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.CheckinEstagio">
 
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="SUA_CHAVE_API_AQUI" />
+
         <activity
             android:name=".activities.SplashActivity"
             android:exported="true"
@@ -25,17 +29,21 @@
         </activity>
 
         <activity
-            android:name=".activities.LoginActivity"
+            android:name=".LoginActivity"
             android:exported="false"
-            android:windowSoftInputMode="adjustResize" />
+            android:theme="@style/Theme.CheckinEstagio.NoActionBar" />
 
         <activity
-            android:name=".activities.CheckinActivity"
+            android:name=".CheckinActivity"
             android:exported="false" />
 
         <activity
             android:name=".activities.HistoricoActivity"
             android:exported="false" />
+
+        <activity
+            android:name=".CadastroActivity"
+            android:exported="false"/>
 
     </application>
 

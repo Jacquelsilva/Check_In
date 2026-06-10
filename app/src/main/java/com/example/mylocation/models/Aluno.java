@@ -35,6 +35,7 @@ public class Aluno {
     public String getEmpresa() { return empresa; }
     public String getEnderecoEmpresa() { return enderecoEmpresa; }
     public String getTurno() { return turno; }
+
     public void setMatricula(@NonNull String matricula) { this.matricula = matricula; }
     public void setNome(String nome) { this.nome = nome; }
     public void setCurso(String curso) { this.curso = curso; }
